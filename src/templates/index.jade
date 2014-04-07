@@ -12,7 +12,7 @@ html
 
     body
         .slides
-            - each slide in slides
-                .slide(class=slide.frontMatter.first?'is-shown':'')
+            - each slide, index in slides
+                .slide(class=index===0?'is-shown':'')
                     .slide-inner
                         != slide.contents

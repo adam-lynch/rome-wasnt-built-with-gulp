@@ -15,6 +15,14 @@
     .unhide();
   }
 
+  //specific slide styles
+  &:first-child {
+    img {
+      float: right;
+      width: 100px;
+    }
+  }
+
   h1 {
     .title();
   }
@@ -23,6 +31,7 @@
 .slide-inner {
   .centre-vertically();
   margin: 0 auto;
+  max-height: 100%;
 }
 
 .title {
