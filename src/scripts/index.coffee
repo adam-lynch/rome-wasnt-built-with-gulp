@@ -1,8 +1,9 @@
+keyCatcher = new (require './keyCatcher')
+
 init = ->
 
 onDocReady = ->
-    Mousetrap.bind '1', ->
-        alert 1
+    keyCatcher.init()
 
 # doc ready:
 document.onreadystatechange = ->

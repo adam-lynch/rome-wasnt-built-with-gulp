@@ -14,6 +14,8 @@ gulpBowerFiles = require 'gulp-bower-files'
 concat = require 'gulp-concat'
 minifyJs = require 'gulp-uglify'
 lazypipe = require 'lazypipe'
+browserify = require 'gulp-browserify'
+rename = require 'gulp-rename'
 
 
 latestSlides = []
@@ -25,7 +27,9 @@ paths =
     compressedImagesDir: -> @imagesDir() + 'compressedImages/'
     compressedImages: -> @compressedImagesDir() + '*'
     slides: -> @source() + 'slides/*.md'
-    scripts: -> @source() + 'scripts/*.coffee'
+    scriptsDir: -> @source() + 'scripts/'
+    scripts: -> @scriptsDir() + '*.coffee'
+    rootScript: -> @scriptsDir() + 'index.coffee'
     stylesDir: -> @source() + 'styles/'
     styles: -> @stylesDir() + '*.less'
     rootStylesheet: -> @stylesDir() + 'index.less'
@@ -42,7 +46,7 @@ paths =
 #
 pipes =
     minifyAndStoreScripts = lazypipe()
-        .pipe(minifyJs)
+#        .pipe(minifyJs)
         .pipe(gulp.dest, paths.outputScriptsDir())
 
 
@@ -104,8 +108,12 @@ gulp.task 'scripts', ['scripts-first-party', 'scripts-third-party']
 
 
 gulp.task 'scripts-first-party', ->
-    gulp.src(paths.scripts())
-    .pipe(coffee())
+    gulp.src(paths.rootScript(), {read:false})
+    .pipe(browserify(
+            transform: ['coffeeify']
+            extensions: ['.coffee']
+        ))
+    .pipe(rename('index.js'))
     .pipe(minifyAndStoreScripts())
 
 
