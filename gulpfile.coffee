@@ -9,6 +9,7 @@ jade = require 'gulp-jade'
 less = require 'gulp-less'
 imagemin = require 'gulp-imagemin'
 autoprefixer = require 'gulp-autoprefixer'
+coffee = require 'gulp-coffee'
 
 
 latestSlides = []
@@ -20,6 +21,7 @@ paths =
     compressedImagesDir: -> @imagesDir() + 'compressedImages/'
     compressedImages: -> @compressedImagesDir() + '*'
     slides: -> @source() + 'slides/*.md'
+    scripts: -> @source() + 'scripts/*.coffee'
     stylesDir: -> @source() + 'styles/'
     styles: -> @stylesDir() + '*.less'
     rootStylesheet: -> @stylesDir() + 'index.less'
@@ -28,6 +30,7 @@ paths =
     output: -> './output/'
     outputHtml: -> @output() + '*.html'
     outputImageDir: -> @output() + 'images/'
+    outputScriptsDir: -> @output() + 'scripts/'
 
 
 #
@@ -38,7 +41,14 @@ paths =
 gulp.task 'default', ['compile']
 
 
-gulp.task 'compile', ['images', 'styles', 'templates']
+gulp.task 'compile', ['images', 'scripts', 'styles', 'templates']
+
+
+gulp.task 'watch', ['compile'], ->
+    gulp.watch paths.compressedImages(), ['images']
+    gulp.watch paths.scripts(), ['scripts']
+    gulp.watch paths.styles(), ['styles']
+    gulp.watch [paths.slides(), paths.templates()], ['templates']
 
 
 gulp.task 'clean', ->
@@ -49,12 +59,6 @@ gulp.task 'clean', ->
 gulp.task 'validate', ->
     gulp.src(paths.outputHtml())
     .pipe(w3cjs())
-
-
-gulp.task 'watch', ['compile'], ->
-    gulp.watch [paths.slides(), paths.templates()], ['templates']
-    gulp.watch paths.styles(), ['styles']
-    gulp.watch paths.compressedImages(), ['images']
 
 
 gulp.task 'compress-images', ->
@@ -82,6 +86,10 @@ gulp.task 'parse-slides', ->
         .pipe each (slide) ->
             latestSlides.push slide
 
+gulp.task 'scripts', ->
+    gulp.src(paths.scripts())
+    .pipe(coffee())
+    .pipe(gulp.dest(paths.outputScriptsDir()))
 
 gulp.task 'templates', ['parse-slides'], ->
     gulp.src(paths.templates())

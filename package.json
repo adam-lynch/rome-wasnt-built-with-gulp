@@ -32,6 +32,7 @@
     "gulp-jade": "~0.4.2",
     "gulp-less": "~1.2.3",
     "gulp-imagemin": "~0.2.0",
-    "gulp-autoprefixer": "0.0.7"
+    "gulp-autoprefixer": "0.0.7",
+    "gulp-coffee": "~1.4.1"
   }
 }
