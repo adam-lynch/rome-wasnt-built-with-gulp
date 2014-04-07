@@ -12,6 +12,8 @@ autoprefixer = require 'gulp-autoprefixer'
 coffee = require 'gulp-coffee'
 gulpBowerFiles = require 'gulp-bower-files'
 concat = require 'gulp-concat'
+minifyJs = require 'gulp-uglify'
+lazypipe = require 'lazypipe'
 
 
 latestSlides = []
@@ -33,6 +35,15 @@ paths =
     outputHtml: -> @output() + '*.html'
     outputImageDir: -> @output() + 'images/'
     outputScriptsDir: -> @output() + 'scripts/'
+
+
+#
+# Resusable pipelines
+#
+pipes =
+    minifyAndStoreScripts = lazypipe()
+        .pipe(minifyJs)
+        .pipe(gulp.dest, paths.outputScriptsDir())
 
 
 #
@@ -95,13 +106,13 @@ gulp.task 'scripts', ['scripts-first-party', 'scripts-third-party']
 gulp.task 'scripts-first-party', ->
     gulp.src(paths.scripts())
     .pipe(coffee())
-    .pipe(gulp.dest(paths.outputScriptsDir()))
+    .pipe(minifyAndStoreScripts())
 
 
 gulp.task 'scripts-third-party', ->
     gulpBowerFiles()
     .pipe(concat('third-party.js'))
-    .pipe(gulp.dest(paths.outputScriptsDir()))
+    .pipe(minifyAndStoreScripts())
 
 
 gulp.task 'templates', ['parse-slides'], ->
