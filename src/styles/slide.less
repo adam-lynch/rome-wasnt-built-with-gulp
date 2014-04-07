@@ -1,4 +1,32 @@
 .slide {
+  .hide();
+
+  position: fixed;
+  height: 100%;
+  width: 100%;
+
+  margin: 0;
+  padding: @slidePadding;
+
   background: @slidesBackground;
   color: @slidesColor;
+
+  &.is-shown {
+    .unhide();
+  }
+
+  h1 {
+    .title();
+  }
+}
+
+.slide-inner {
+  .centre-vertically();
+  margin: 0 auto;
+}
+
+.title {
+  .title-type();
+
+  margin-top: 0;
 }

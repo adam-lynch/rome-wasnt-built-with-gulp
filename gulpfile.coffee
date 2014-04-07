@@ -8,6 +8,7 @@ each = require 'through'
 jade = require 'gulp-jade'
 less = require 'gulp-less'
 imagemin = require 'gulp-imagemin'
+autoprefixer = require 'gulp-autoprefixer'
 
 
 latestSlides = []
@@ -61,9 +62,11 @@ gulp.task 'compress-images', ->
     .pipe(imagemin())
     .pipe(gulp.dest(paths.compressedImagesDir()))
 
+
 #
 # Secondary level tasks
 #
+
 
 gulp.task 'images', ->
     gulp.src(paths.compressedImages())
@@ -92,4 +95,5 @@ gulp.task 'templates', ['parse-slides'], ->
 gulp.task 'styles', ->
     gulp.src(paths.rootStylesheet())
     .pipe(less())
+    .pipe(autoprefixer('last 2 versions'))
     .pipe(gulp.dest(paths.output()))
