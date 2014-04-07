@@ -1,0 +1,19 @@
+.slides {
+  &::before {
+    .slidesLining();
+  }
+}
+
+.slidesLining {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  height: @slidesLiningThickness;
+  width: 100%;
+
+  background: @slidesLiningColor;
+  opacity: @slidesLiningOpacity;
+  content: '';
+}
