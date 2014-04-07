@@ -1,35 +1,36 @@
 {
-    "name": "gulp-talk",
-    "version": "0.0.0",
-    "description": "",
-    "main": "gulpfile.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/adam-lynch/gulp-talk.git"
-    },
-    "keywords": [
-        "gulp",
-        "talk"
-    ],
-    "author": "Adam Lynch <contact@adamlynch.ie>",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/adam-lynch/gulp-talk/issues"
-    },
-    "homepage": "https://github.com/adam-lynch/gulp-talk",
-    "devDependencies": {
-        "cult": "~1.1.0",
-        "gulp-markdown": "~0.1.2",
-        "gulp": "~3.6.0",
-        "gulp-clean": "~0.2.4",
-        "gulp-w3cjs": "~0.1.2",
-        "coffee-script": "~1.7.1",
-        "gulp-front-matter": "~1.0.0",
-        "through": "~2.3.4",
-        "gulp-jade": "~0.4.2",
-        "gulp-less": "~1.2.3"
-    }
+  "name": "gulp-talk",
+  "version": "0.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adam-lynch/gulp-talk.git"
+  },
+  "keywords": [
+    "gulp",
+    "talk"
+  ],
+  "author": "Adam Lynch <contact@adamlynch.ie>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adam-lynch/gulp-talk/issues"
+  },
+  "homepage": "https://github.com/adam-lynch/gulp-talk",
+  "devDependencies": {
+    "cult": "~1.1.0",
+    "gulp-markdown": "~0.1.2",
+    "gulp": "~3.6.0",
+    "gulp-clean": "~0.2.4",
+    "gulp-w3cjs": "~0.1.2",
+    "coffee-script": "~1.7.1",
+    "gulp-front-matter": "~1.0.0",
+    "through": "~2.3.4",
+    "gulp-jade": "~0.4.2",
+    "gulp-less": "~1.2.3",
+    "gulp-imagemin": "~0.2.0"
+  }
 }
