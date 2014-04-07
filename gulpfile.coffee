@@ -7,7 +7,6 @@ w3cjs = require 'gulp-w3cjs'
 each = require 'through'
 jade = require 'gulp-jade'
 less = require 'gulp-less'
-debug = require 'gulp-debug'
 
 latestSlides = []
 # Any reusable paths / globs go here; trying to keep things DRY
@@ -57,5 +56,4 @@ gulp.task 'parse-slides', ->
 gulp.task 'styles', ->
     gulp.src(paths.styles())
     .pipe(less())
-#    .pipe(debug())
     .pipe(gulp.dest(paths.output))
