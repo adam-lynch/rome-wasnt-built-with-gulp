@@ -11,12 +11,14 @@ less = require 'gulp-less'
 latestSlides = []
 # Any reusable paths / globs go here; trying to keep things DRY
 paths =
-    source: './src/'
-    output: './output/'
-    slides: -> @source + 'slides/*.md'
-    styles: -> @source + 'styles/index.less'
-    templates: -> @source + 'templates/*.jade'
-    outputHtml: -> @output + '*.html'
+    source: -> './src/'
+    output: -> './output/'
+    slides: -> @source() + 'slides/*.md'
+    stylesDir: -> @source() + 'styles/'
+    styles: -> @stylesDir() + '*.less'
+    rootStylesheet: -> @stylesDir() + 'index.less'
+    templates: -> @source() + 'templates/*.jade'
+    outputHtml: -> @output() + '*.html'
 
 #
 # Main tasks
@@ -24,17 +26,10 @@ paths =
 
 gulp.task 'default', ['compile']
 
-gulp.task 'compile', ['parse-slides', 'styles'], ->
-    gulp.src(paths.templates())
-        .pipe(jade(
-            locals:
-                slides: latestSlides
-        ))
-        .pipe(gulp.dest(paths.output))
-
+gulp.task 'compile', ['templates', 'styles'], ->
 
 gulp.task 'clean', ->
-    gulp.src(paths.output)
+    gulp.src(paths.output())
     .pipe(clean())
 
 gulp.task 'validate', ->
@@ -42,18 +37,32 @@ gulp.task 'validate', ->
     .pipe(w3cjs())
 
 
+gulp.task 'watch', ['compile'], ->
+    gulp.watch [paths.slides(), paths.templates()], ['templates']
+    gulp.watch paths.styles(), ['styles']
+
 #
 # Secondary level tasks
 #
 
 gulp.task 'parse-slides', ->
+    latestSlides = [] # reset
+
     gulp.src(paths.slides())
         .pipe(frontMatter())
         .pipe(markdown())
         .pipe each (slide) ->
             latestSlides.push slide
 
+gulp.task 'templates', ['parse-slides'], ->
+    gulp.src(paths.templates())
+    .pipe(jade(
+            locals:
+                slides: latestSlides
+        ))
+    .pipe(gulp.dest(paths.output()))
+
 gulp.task 'styles', ->
-    gulp.src(paths.styles())
+    gulp.src(paths.rootStylesheet())
     .pipe(less())
-    .pipe(gulp.dest(paths.output))
+    .pipe(gulp.dest(paths.output()))
