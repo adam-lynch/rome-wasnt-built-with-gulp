@@ -28,6 +28,7 @@
     "coffee-script": "~1.7.1",
     "gulp-front-matter": "~1.0.0",
     "through2": "~0.4.1",
-    "through": "~2.3.4"
+    "through": "~2.3.4",
+    "gulp-jade": "~0.4.2"
   }
 }

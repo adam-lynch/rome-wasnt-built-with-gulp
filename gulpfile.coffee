@@ -5,6 +5,7 @@ frontMatter = require 'gulp-front-matter'
 clean = require 'gulp-clean'
 w3cjs = require 'gulp-w3cjs'
 each = require 'through'
+jade = require 'gulp-jade'
 
 latestSlides = []
 # Any reusable paths / globs go here; trying to keep things DRY
@@ -12,6 +13,7 @@ paths =
     source: './src/'
     output: './output/'
     slides: -> @source + 'slides/*.md'
+    templates: -> @source + 'templates/*.jade'
     outputHtml: -> @output + '*.html'
 
 #
@@ -21,6 +23,12 @@ paths =
 gulp.task 'default', ['compile']
 
 gulp.task 'compile', ['parse-slides'], () ->
+    gulp.src(paths.templates())
+        .pipe(jade(
+            locals:
+                slides: latestSlides
+        ))
+        .pipe(gulp.dest(paths.output))
 
 
 gulp.task 'clean', () ->
