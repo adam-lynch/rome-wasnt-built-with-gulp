@@ -1,0 +1,18 @@
+{
+    "name": "gulp-talk",
+    "version": "0.0.1",
+    "homepage": "https://github.com/adam-lynch/gulp-talk",
+    "authors": [
+        "Adam Lynch <contact@adamlynch.ie>"
+    ],
+    "license": "MIT",
+    "private": true,
+    "dependencies": {
+        "mousetrap": "~1.4.6"
+    },
+    "overrides": {
+        "mousetrap": {
+            "main": "mousetrap.min.js"
+        }
+    }
+}

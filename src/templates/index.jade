@@ -11,9 +11,13 @@ html
         link(rel='stylesheet', href='index.css')
 
     body
+
         #slides.slides
             - each slide, index in slides
                 .slide(class=index===0?'is-shown':'')
                     .slide-inner
                         != slide.contents
+
+
+        script(src='scripts/third-party.js')
         script(src='scripts/index.js')

@@ -10,6 +10,8 @@ less = require 'gulp-less'
 imagemin = require 'gulp-imagemin'
 autoprefixer = require 'gulp-autoprefixer'
 coffee = require 'gulp-coffee'
+gulpBowerFiles = require 'gulp-bower-files'
+concat = require 'gulp-concat'
 
 
 latestSlides = []
@@ -86,10 +88,21 @@ gulp.task 'parse-slides', ->
         .pipe each (slide) ->
             latestSlides.push slide
 
-gulp.task 'scripts', ->
+
+gulp.task 'scripts', ['scripts-first-party', 'scripts-third-party']
+
+
+gulp.task 'scripts-first-party', ->
     gulp.src(paths.scripts())
     .pipe(coffee())
     .pipe(gulp.dest(paths.outputScriptsDir()))
+
+
+gulp.task 'scripts-third-party', ->
+    gulpBowerFiles()
+    .pipe(concat('third-party.js'))
+    .pipe(gulp.dest(paths.outputScriptsDir()))
+
 
 gulp.task 'templates', ['parse-slides'], ->
     gulp.src(paths.templates())

@@ -1,7 +1,8 @@
 init = ->
 
 onDocReady = ->
-    console.debug 'hello, world!'
+    Mousetrap.bind '1', ->
+        alert 1
 
 # doc ready:
 document.onreadystatechange = ->
