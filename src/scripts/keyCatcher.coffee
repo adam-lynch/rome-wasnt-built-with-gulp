@@ -10,11 +10,11 @@ module.exports = class
 
     subscribers: => [
         {
-            keys: 'left'
+            keys: 'up'
             handler: slideChanger.previous
         },
         {
-            keys: 'right'
+            keys: 'down'
             handler: slideChanger.next
         }
     ]
