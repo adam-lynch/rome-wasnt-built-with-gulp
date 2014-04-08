@@ -5,7 +5,7 @@ module.exports = class
         current = @getCurrentSlide()
         currentSlideIndex = @getIndexOfSlide(current)
 
-        unless currentSlideIndex >= @getNumberOfSlides()
+        unless currentSlideIndex >= (@getNumberOfSlides() - 1)
             @changeToSlideByIndex currentSlideIndex + 1, current
 
     previous: =>
