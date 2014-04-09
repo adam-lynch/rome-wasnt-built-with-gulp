@@ -17,7 +17,8 @@
   //specific slide styles
   &:first-child {
     img {
-      float: right;
+      position: absolute;
+      right: 0;
       width: 100px;
     }
   }
@@ -45,6 +46,7 @@
   .centre-vertically();
   max-height: 100%;
   margin: @slidePadding auto;
+  text-align: center;
 }
 
 .reset-slide-offset {

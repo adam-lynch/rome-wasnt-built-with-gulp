@@ -5,6 +5,11 @@ init = ->
 onDocReady = ->
     keyCatcher.init()
 
+    $ =>
+        $(window).on 'resize', (()->
+            $('h1, h2, h3, p, a, li').css('z-index', 1)
+        ).debounce(50)
+
 # doc ready:
 document.onreadystatechange = ->
     state = document.readyState
