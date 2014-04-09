@@ -3,16 +3,14 @@ module.exports = class
 
     next: =>
         slides = @getSlides()
-        current = @getCurrentSlide()
-        currentSlideIndex = slides.indexOf(current)
+        currentSlideIndex = slides.indexOf @getCurrentSlide()
 
         unless currentSlideIndex >= (slides.length - 1)
             @changeToSlideByIndex currentSlideIndex + 1
 
     previous: =>
         slides = @getSlides()
-        current = @getCurrentSlide()
-        currentSlideIndex = slides.indexOf(current)
+        currentSlideIndex = slides.indexOf @getCurrentSlide()
 
         unless currentSlideIndex <= 0
             @changeToSlideByIndex currentSlideIndex - 1
