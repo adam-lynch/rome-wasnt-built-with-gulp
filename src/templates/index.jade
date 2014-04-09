@@ -12,9 +12,9 @@ html
 
     body
 
-        #slides.slides(data-current-slide="0")
+        ol#slides.slides(data-current-slide="0")
             - each slide, index in slides
-                .slide(class=slide.frontMatter.customClass || '')(id="slide-"+index)
+                li.slide(class=slide.frontMatter.customClass || '')(id="slide-"+index)
                     .slide-inner
                         != slide.contents
 
