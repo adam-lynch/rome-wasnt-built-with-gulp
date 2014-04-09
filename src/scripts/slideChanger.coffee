@@ -16,11 +16,14 @@ module.exports = class
             @changeToSlideByIndex currentSlideIndex - 1
 
     changeToSlideByIndex: (index) =>
-        @getSlides()[index].scrollIntoView()
-        @getSlidesContainer().dataset[currentSlideDataAttributeName] = index
+        location.href = '#slide-'+index
 
     getCurrentSlide: =>
-        slideIndex = parseInt(@getSlidesContainer().dataset[currentSlideDataAttributeName], 10)
+        if location.hash
+            slideIndex = parseInt(location.hash.split('-')[1])
+        else
+            slideIndex = 0
+
         @getSlides()[slideIndex]
 
     # returns an {Array}

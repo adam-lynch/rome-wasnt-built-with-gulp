@@ -7,3 +7,8 @@ body {
   padding: 0;
   margin: 0;
 }
+
+//autoprefixer doesn't seem to handle :scrollbar
+body::-webkit-scrollbar {
+  width: 0;
+}

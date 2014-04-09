@@ -11,3 +11,17 @@
   top: 50%;
   transform: translateY(-50%);
 }
+
+.uncentre-vertically {
+  position: static;
+  transform: translateY(0);
+}
+
+.fullScreenBackground(@filename) {
+  background: url("@{imagePath}/@{filename}") no-repeat top center;
+  background-size: cover;
+
+  &::before {
+    display: none;
+  }
+}

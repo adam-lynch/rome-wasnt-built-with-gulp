@@ -1,21 +1,37 @@
 .slide {
 
-//  position: fixed;
+  position: relative;
   float: left;
   height: 100%;
   width: 100%;
 
   margin: 0;
-  padding: @slidePadding;
 
   background: @slidesBackground;
   color: @slidesColor;
+
+//  &::before {
+//    .slidesLining();
+//  }
 
   //specific slide styles
   &:first-child {
     img {
       float: right;
       width: 100px;
+    }
+  }
+
+  &:nth-child(3){
+    background: red;
+  }
+
+  &.teamwork-slide {
+    .fullScreenBackground('teamwork.jpg');
+    background-position-x: left;
+
+    .slide-inner {
+      .uncentre-vertically();
     }
   }
 
@@ -26,12 +42,26 @@
 
 .slide-inner {
   .centre-vertically();
-  margin: 0 auto;
   max-height: 100%;
+  margin: @slidePadding auto;
 }
 
 .title {
   .title-type();
 
   margin-top: 0;
+}
+
+.slidesLining {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  z-index: 100;
+
+  height: @slidesLiningThickness;
+  width: 100%;
+
+  background: @slidesLiningColor;
+  opacity: @slidesLiningOpacity;
+  content: '';
 }

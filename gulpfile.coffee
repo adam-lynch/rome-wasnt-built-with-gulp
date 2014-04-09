@@ -23,7 +23,7 @@ latestSlides = []
 paths =
     source: -> './src/'
     imagesDir: -> @source() + 'images/'
-    images: -> @imagesDir() + '*.png'
+    images: -> [@imagesDir() + '*.png', @imagesDir() + '*.jpg']
     compressedImagesDir: -> @imagesDir() + 'compressedImages/'
     compressedImages: -> @compressedImagesDir() + '*'
     slides: -> @source() + 'slides/*.md'
