@@ -6,6 +6,7 @@ onDocReady = ->
     keyCatcher.init()
 
     $ =>
+        # repaint elements using vw units
         $(window).on 'resize', (()->
             $('h1, h2, h3, p, a, li').css('z-index', 1)
         ).debounce(50)
