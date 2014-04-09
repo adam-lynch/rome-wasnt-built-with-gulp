@@ -28,11 +28,12 @@
 
   &.teamwork-slide {
     .fullScreenBackground('teamwork.jpg');
-    background-position-x: left;
+    .reset-slide-offset();
+  }
 
-    .slide-inner {
-      .uncentre-vertically();
-    }
+  &.ked-slide {
+    .fullScreenBackground('ked.jpg');
+    .reset-slide-offset();
   }
 
   h1 {
@@ -44,6 +45,13 @@
   .centre-vertically();
   max-height: 100%;
   margin: @slidePadding auto;
+}
+
+.reset-slide-offset {
+
+  .slide-inner {
+    .uncentre-vertically();
+  }
 }
 
 .title {
