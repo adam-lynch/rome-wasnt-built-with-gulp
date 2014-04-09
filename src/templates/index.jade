@@ -12,9 +12,9 @@ html
 
     body
 
-        #slides.slides
+        #slides.slides(data-current-slide="0")
             - each slide, index in slides
-                .slide(class=index===0?'is-shown':'')
+                .slide
                     .slide-inner
                         != slide.contents
 

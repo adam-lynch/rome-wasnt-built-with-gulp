@@ -1,31 +1,29 @@
 module.exports = class
-    shownClass: 'is-shown'
+    currentSlideDataAttributeName = 'currentSlide'
 
     next: =>
+        slides = @getSlides()
         current = @getCurrentSlide()
-        currentSlideIndex = @getIndexOfSlide(current)
+        currentSlideIndex = slides.indexOf(current)
 
-        unless currentSlideIndex >= (@getNumberOfSlides() - 1)
-            @changeToSlideByIndex currentSlideIndex + 1, current
+        unless currentSlideIndex >= (slides.length - 1)
+            @changeToSlideByIndex currentSlideIndex + 1
 
     previous: =>
+        slides = @getSlides()
         current = @getCurrentSlide()
-        currentSlideIndex = @getIndexOfSlide(current)
+        currentSlideIndex = slides.indexOf(current)
 
         unless currentSlideIndex <= 0
-            @changeToSlideByIndex currentSlideIndex - 1, current
+            @changeToSlideByIndex currentSlideIndex - 1
 
-    changeToSlideByIndex: (index, currentSlideBeforeThis) =>
-        newCurrentSlide = @getSlideByIndex(index)
-        newCurrentSlide.scrollIntoView()
-        newCurrentSlide.classList.add @shownClass
-        currentSlideBeforeThis.classList.remove @shownClass
-
+    changeToSlideByIndex: (index) =>
+        @getSlides()[index].scrollIntoView()
+        @getSlidesContainer().dataset[currentSlideDataAttributeName] = index
 
     getCurrentSlide: =>
-        @getSlides().filter( (slide) =>
-            slide.classList.contains @shownClass
-        )[0]
+        slideIndex = parseInt(@getSlidesContainer().dataset[currentSlideDataAttributeName], 10)
+        @getSlides()[slideIndex]
 
     # returns an {Array}
     getSlides: =>
@@ -33,12 +31,3 @@ module.exports = class
 
     getSlidesContainer: =>
         document.getElementById('slides')
-
-    getNumberOfSlides: =>
-        @getSlides().length
-
-    getIndexOfSlide: (slide) =>
-        @getSlides().indexOf slide
-
-    getSlideByIndex: (index) =>
-        @getSlides()[index]
