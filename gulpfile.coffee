@@ -122,6 +122,10 @@ gulp.task 'scripts-third-party', ->
     .pipe(concat('third-party.js'))
     .pipe(minifyAndStoreScripts())
 
+    gulp.src(paths.source() + 'third-party/third-party-static/*')
+    .pipe(concat('third-party-static.js'))
+    .pipe(minifyAndStoreScripts())
+
 
 gulp.task 'templates', ['parse-slides'], ->
     gulp.src(paths.templates())
@@ -137,3 +141,9 @@ gulp.task 'styles', ->
     .pipe(less())
     .pipe(autoprefixer('last 2 versions'))
     .pipe(gulp.dest(paths.output()))
+
+gulp.task 'watch', ['compile'], ->
+    gulp.watch paths.images(), ['images']
+    gulp.watch paths.scripts(), ['scripts']
+    gulp.watch paths.styles(), ['styles']
+    gulp.watch [paths.slides(), paths.templates()], ['templates']
