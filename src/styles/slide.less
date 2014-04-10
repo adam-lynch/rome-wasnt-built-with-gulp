@@ -24,7 +24,7 @@
   }
 
   &:nth-child(3){
-    background: red;
+    background: red;//TODO: remove
   }
 
   &.teamwork-slide {
@@ -35,6 +35,24 @@
   &.ked-slide {
     .fullScreenBackground('ked.jpg');
     .reset-slide-offset();
+  }
+
+  &.massive-list{
+    ul {
+      li {
+        display: inline-block;
+        margin: 10px 15px;
+        .long-list-type();
+
+        &:nth-child(2n){
+          color: @longListSecondaryColor;
+        }
+
+        &:nth-child(3n){
+          color: @longListTertiaryColor;
+        }
+      }
+    }
   }
 
   h1 {

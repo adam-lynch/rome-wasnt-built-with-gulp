@@ -141,9 +141,3 @@ gulp.task 'styles', ->
     .pipe(less())
     .pipe(autoprefixer('last 2 versions'))
     .pipe(gulp.dest(paths.output()))
-
-gulp.task 'watch', ['compile'], ->
-    gulp.watch paths.images(), ['images']
-    gulp.watch paths.scripts(), ['scripts']
-    gulp.watch paths.styles(), ['styles']
-    gulp.watch [paths.slides(), paths.templates()], ['templates']
