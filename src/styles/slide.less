@@ -16,6 +16,10 @@
 
   //specific slide styles
   &:first-child {
+    h1 {
+      font-size: @firstSlideTitleSize;
+    }
+
     img {
       position: absolute;
       right: 0;
@@ -67,10 +71,6 @@
       }
     }
   }
-
-  h1 {
-    .title();
-  }
 }
 
 .slide-inner {
@@ -93,6 +93,15 @@
   margin-top: 0;
 }
 
+.subtitle {
+  .subtitle-type();
+}
+
+.tertiarytitle {
+  .tertiarytitle-type();
+}
+
+
 .slidesLining {
   position: absolute;
   bottom: 100%;
@@ -105,4 +114,17 @@
   background: @slidesLiningColor;
   opacity: @slidesLiningOpacity;
   content: '';
+}
+
+
+h1 {
+  .title();
+}
+
+h2 {
+  .subtitle();
+}
+
+h2 {
+  .tertiarytitle();
 }

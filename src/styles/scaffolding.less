@@ -23,3 +23,13 @@ pre {
   overflow-x: hidden;
   overflow-y: scroll;
 }
+
+a {
+  .link-type();
+  text-decoration: none;
+
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+  }
+}

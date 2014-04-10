@@ -4,12 +4,21 @@
 @slidesLiningThickness: 10px;
 @slidesLiningOpacity: 0.8;
 
-@slidesBackground: @white;
-@slidesColor: @grayDark;
+@slidesBackground: @teal;
+@slidesColor: @white;
 @slidePadding: 0 10%;
 
-@titleColor: @teal;
+@titleColor: @white;
+@subtitleColor: darken(@titleColor, 5%) ;
+@tertiarytitleColor: darken(@subtitleColor, 10%);
+@linkColor: @red;
 
-@longListPrimaryColor: #0055be;
-@longListSecondaryColor: desaturate(spin(@longListPrimaryColor, 50%), 20%);
-@longListTertiaryColor: spin(@longListSecondaryColor, 50%);
+@longListPrimaryColor: @white;
+@longListSecondaryColor: @turquoise;
+@longListTertiaryColor: spin(@longListSecondaryColor, 100%);
+
+
+@titleSize: 60px;
+@subtitleSize: 4vw;
+@tertiarytitleSize: 4vw;
+@firstSlideTitleSize: 4.5vw;
