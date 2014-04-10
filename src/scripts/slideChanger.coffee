@@ -16,7 +16,10 @@ module.exports = class
             @changeToSlideByIndex currentSlideIndex - 1
 
     changeToSlideByIndex: (index) =>
-        location.href = '#slide-'+index
+        $('body').animate {
+            scrollTop: $('#slide-'+index).offset().top
+        }, 200, =>
+            location.href = '#slide-'+index
 
     getCurrentSlide: =>
         if location.hash
