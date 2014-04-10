@@ -1,7 +1,7 @@
 {
-  "name": "gulp-talk",
+  "name": "rome-wasnt-built-with-gulp",
   "version": "0.0.1",
-  "homepage": "https://github.com/adam-lynch/gulp-talk",
+  "homepage": "https://github.com/adam-lynch/rome-wasnt-built-with-gulp",
   "authors": [
     "Adam Lynch <contact@adamlynch.ie>"
   ],
@@ -10,7 +10,6 @@
   "dependencies": {
     "mousetrap": "~1.4.6",
     "jQuery": "~2.1.0",
-    "jquery": "1.9",
     "sugar": "~1.4.1"
   },
   "overrides": {

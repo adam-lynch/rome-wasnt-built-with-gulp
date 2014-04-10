@@ -1,7 +1,7 @@
 {
-  "name": "gulp-talk",
-  "version": "0.0.0",
-  "description": "",
+  "name": "rome-wasnt-built-with-gulp",
+  "version": "0.0.1",
+  "description": "A talk on all things Gulp",
   "private": true,
   "main": "gulpfile.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/adam-lynch/gulp-talk.git"
+    "url": "https://github.com/adam-lynch/rome-wasnt-built-with-gulp.git"
   },
   "keywords": [
     "gulp",
@@ -19,9 +19,9 @@
   "author": "Adam Lynch <contact@adamlynch.ie>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/adam-lynch/gulp-talk/issues"
+    "url": "https://github.com/adam-lynch/rome-wasnt-built-with-gulp/issues"
   },
-  "homepage": "https://github.com/adam-lynch/gulp-talk",
+  "homepage": "https://github.com/adam-lynch/rome-wasnt-built-with-gulp",
   "devDependencies": {
     "cult": "~1.1.0",
     "gulp-markdown": "~0.1.2",
