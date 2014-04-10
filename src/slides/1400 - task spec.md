@@ -1,2 +1,2 @@
-# What's next?
+# What's Next?
 ## Standardized task specification
