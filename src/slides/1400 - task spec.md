@@ -1,2 +1,1 @@
-# What's Next?
-## Standardized task specification
+# Future Friendly
