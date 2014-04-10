@@ -37,9 +37,10 @@
     .reset-slide-offset();
   }
 
-  &.massive-list{
+  &.long-list{
     ul {
       li {
+        color: @longListPrimaryColor;
         display: inline-block;
         margin: 10px 15px;
         .long-list-type();
@@ -51,6 +52,16 @@
         &:nth-child(3n){
           color: @longListTertiaryColor;
         }
+      }
+    }
+  }
+
+  &.short-list{
+    ul {
+      li {
+        .large-type();
+        margin: 10px 0;
+        text-align: left;
       }
     }
   }

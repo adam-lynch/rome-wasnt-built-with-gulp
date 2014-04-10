@@ -10,5 +10,6 @@
 
 @titleColor: @teal;
 
-@longListSecondaryColor: @redishBlue;
-@longListTertiaryColor: @grayishBlue;
+@longListPrimaryColor: #0055be;
+@longListSecondaryColor: desaturate(spin(@longListPrimaryColor, 50%), 20%);
+@longListTertiaryColor: spin(@longListSecondaryColor, 50%);
