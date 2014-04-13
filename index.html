@@ -1,0 +1,245 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><!-- TODO--><title>Rome Wasn't Built With Gulp</title><meta name="description" content=""><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="index.css"></head><body class="language-javascript"><span id="forkongithub"><a href="https://github.com/adam-lynch/rome-wasnt-built-with-gulp">Fork me on GitHub</a></span><ol id="slides" data-current-slide="0" class="slides"><li id="slide-0" class="slide"><div class="slide-inner"><p><img src="images/gulp-2x.png" alt="Gulp"></p>
+<h1 id="rome-wasn-t-built-with-gulp">Rome Wasn&#39;t Built With Gulp</h1>
+<h2 id="adam-lynch">Adam Lynch</h2>
+<ul>
+<li><a href="http://twitter.com/lynchy010"> @lynchy010 </a></li>
+<li><a href="http://github.com/adam-lynch"> github.com/adam-lynch </a></li>
+<li><a href="http://adamlynch.ie"> adamlynch.ie </a></li>
+</ul>
+</div></li><li id="slide-1" class="slide teamwork-slide"><div class="slide-inner"></div></li><li id="slide-2" class="slide ked-slide"><div class="slide-inner"></div></li><li id="slide-3" class="slide"><div class="slide-inner"><p><img src="images/hammer.png" alt="Hammer"></p>
+</div></li><li id="slide-4" class="slide"><div class="slide-inner"><p><img src="images/grunt.png" alt="Grunt"></p>
+</div></li><li id="slide-5" class="slide"><div class="slide-inner"><pre><code class="lang-javascript">module.exports = function(grunt) {
+
+  grunt.initConfig({
+    pkg: grunt.file.readJSON(&#39;package.json&#39;),
+    concat: {
+      options: {
+        separator: &#39;;&#39;
+      },
+      dist: {
+        src: [&#39;src/**/*.js&#39;],
+        dest: &#39;dist/&lt;%= pkg.name %&gt;.js&#39;
+      }
+    },
+    uglify: {
+      options: {
+        banner: &#39;/*! &lt;%= pkg.name %&gt; &lt;%= grunt.template.today(&quot;dd-mm-yyyy&quot;) %&gt; */\n&#39;
+      },
+      dist: {
+        files: {
+          &#39;dist/&lt;%= pkg.name %&gt;.min.js&#39;: [&#39;&lt;%= concat.dist.dest %&gt;&#39;]
+        }
+      }
+    },
+    qunit: {
+      files: [&#39;test/**/*.html&#39;]
+    },
+    jshint: {
+      files: [&#39;Gruntfile.js&#39;, &#39;src/**/*.js&#39;, &#39;test/**/*.js&#39;]
+    },
+    watch: {
+      files: [&#39;&lt;%= jshint.files %&gt;&#39;],
+      tasks: [&#39;jshint&#39;, &#39;qunit&#39;]
+    }
+  });
+
+  grunt.loadNpmTasks(&#39;grunt-contrib-uglify&#39;);
+  grunt.loadNpmTasks(&#39;grunt-contrib-jshint&#39;);
+  grunt.loadNpmTasks(&#39;grunt-contrib-qunit&#39;);
+  grunt.loadNpmTasks(&#39;grunt-contrib-watch&#39;);
+  grunt.loadNpmTasks(&#39;grunt-contrib-concat&#39;);
+
+  grunt.registerTask(&#39;test&#39;, [&#39;jshint&#39;, &#39;qunit&#39;]);
+
+  grunt.registerTask(&#39;default&#39;, [&#39;jshint&#39;, &#39;qunit&#39;, &#39;concat&#39;, &#39;uglify&#39;]);
+
+};
+</code></pre>
+</div></li><li id="slide-6" class="slide"><div class="slide-inner"><p><img src="images/gulp-2x.png" alt="Gulp"></p>
+</div></li><li id="slide-7" class="slide"><div class="slide-inner"><pre><code class="lang-javascript">var gulp = require(&#39;gulp&#39;);
+var concat = require(&#39;gulp-concat&#39;);
+var jshint = require(&#39;gulp-jshint&#39;);
+var uglify = require(&#39;gulp-uglify&#39;);
+var mocha = require(&#39;gulp-mocha&#39;);
+
+gulp.task(&#39;default&#39;, [&#39;test&#39;, &#39;scripts&#39;]);
+
+gulp.task(&#39;scripts&#39;, function() {
+  gulp.src(&#39;./src/scripts/*.js&#39;)
+    .pipe(jshint()))
+    .pipe(jshint.reporter(&#39;default&#39;))
+    .pipe(concat(&#39;script.js&#39;))
+    .pipe(uglify())
+    .pipe(gulp.dest(&#39;./build/scripts/&#39;));
+});
+
+gulp.task(&#39;test&#39;, function(){
+  gulp.src(&#39;./src/tests/*.js&#39;)
+    .pipe(mocha());
+});
+
+gulp.task(&#39;watch&#39;, [&#39;scripts&#39;], function(){
+  gulp.src(&#39;./src/scripts/*.js&#39;, [&#39;scripts&#39;]);
+  gulp.src(&#39;./src/tests/*.js&#39;, [&#39;test&#39;]);
+});
+</code></pre>
+</div></li><li id="slide-8" class="slide"><div class="slide-inner"><h1 id="gulp-stream-https-github-com-substack-stream-handbook-ing-build-system">Gulp = <a href="https://github.com/substack/stream-handbook">Stream</a>ing build system</h1>
+</div></li><li id="slide-9" class="slide"><div class="slide-inner"><pre><code>gulp.task(name, doSomething);
+</code></pre><pre><code>gulp.src(globs);
+</code></pre><pre><code>gulp.dest(path);
+</code></pre><pre><code>gulp.watch(globs, tasks);
+</code></pre></div></li><li id="slide-10" class="slide"><div class="slide-inner"><h1 id="plugins">Plugins</h1>
+</div></li><li id="slide-11" class="slide long-list"><div class="slide-inner"><ul>
+<li>gulp-autoprefixer</li>
+<li>gulp-autowatch</li>
+<li>gulp-beautify</li>
+<li>gulp-bless</li>
+<li>gulp-bower-files</li>
+<li>gulp-browserify</li>
+<li>gulp-buster</li>
+<li>gulp-cached</li>
+<li>gulp-changed</li>
+<li>gulp-chmod</li>
+<li>gulp-chug</li>
+<li>gulp-clean</li>
+<li>gulp-clipboard</li>
+<li>gulp-coffee</li>
+<li>gulp-coffeelint</li>
+<li>gulp-coffeelint-threshold</li>
+<li>gulp-concat</li>
+<li>gulp-coverage</li>
+<li>gulp-debug</li>
+<li>gulp-exec</li>
+<li>gulp-filesize</li>
+<li>gulp-filter</li>
+<li>gulp-front-matter</li>
+<li>gulp-ftp</li>
+<li>gulp-gh-pages</li>
+<li>gulp-gitmodified</li>
+<li>gulp-grunt</li>
+<li>gulp-haml</li>
+<li>gulp-handlebars</li>
+<li>gulp-iced</li>
+<li>gulp-iconfont</li>
+<li>gulp-ignore</li>
+<li>gulp-insert</li>
+<li>gulp-imagemin</li>
+<li>gulp-jade</li>
+<li>gulp-jshint</li>
+<li>gulp-less</li>
+<li>gulp-livereload</li>
+<li>gulp-load-plugins</li>
+<li>gulp-markdown</li>
+<li>gulp-minify-css</li>
+<li>gulp-mocha</li>
+<li>gulp-mustache</li>
+<li>gulp-myth</li>
+<li>gulp-newer</li>
+<li>gulp-ngmin</li>
+<li>gulp-open</li>
+<li>gulp-order</li>
+<li>gulp-plato</li>
+<li>gulp-plumber</li>
+<li>gulp-react</li>
+<li>gulp-rss</li>
+<li>gulp-ssg</li>
+<li>gulp-strip-debug</li>
+<li>gulp-svg-sprites</li>
+<li>gulp-svgmin</li>
+<li>gulp-task-listing</li>
+<li>gulp-tsc</li>
+<li>gulp-uglify</li>
+<li>gulp-uncss</li>
+<li>gulp-unzip</li>
+<li>gulp-useref</li>
+<li>gulp-w3cjs</li>
+<li>gulp-webp</li>
+<li>gulp-zip</li>
+</ul>
+</div></li><li id="slide-12" class="slide"><div class="slide-inner"><h1 id="gulp-load-plugins">gulp-load-plugins</h1>
+<pre><code>var coffee = require(&#39;gulp-coffee&#39;);
+var concat = require(&#39;gulp-concat&#39;);
+var uglify = require(&#39;gulp-uglify&#39;);
+
+gulp.src(&#39;./*.coffee&#39;)
+    .pipe(coffee())
+    .pipe(concat(&#39;script.js&#39;))
+    .pipe(uglify())
+    .pipe(gulp.dest(&#39;./output))
+</code></pre><pre><code>var plugins = require(&#39;gulp-load-plugins&#39;)();
+
+gulp.src(&#39;./*.coffee&#39;)
+    .pipe(plugins.coffee())
+    .pipe(plugins.concat(&#39;script.js&#39;))
+    .pipe(plugins.uglify())
+    .pipe(gulp.dest(&#39;./output))
+</code></pre></div></li><li id="slide-13" class="slide"><div class="slide-inner"><h1 id="gulp-autoprefixer">gulp-autoprefixer</h1>
+<pre><code>gulp.src(&#39;./src/styles/*.css&#39;)
+    .pipe(autoprefixer(&#39;last 2 versions&#39;, &#39;&gt; 5%&#39;))
+    .pipe(gulp.dest(&#39;./output/styles&#39;))
+</code></pre></div></li><li id="slide-14" class="slide"><div class="slide-inner"><h1 id="gulp-filter">gulp-filter</h1>
+<pre><code>var excludeLibsFilter = filter(&#39;!./src/libs/*&#39;);
+
+gulp.src(&#39;./src/*.js&#39;)
+    .pipe(excludeLibsFilter)
+    .pipe(uglify())
+    .pipe(excluseLibsFilter.restore())
+    .pipe(concat(&#39;script.js&#39;))
+    .pipe(gulp.dest(&#39;./output&#39;))
+</code></pre></div></li><li id="slide-15" class="slide"><div class="slide-inner"><h1 id="gulp-bower-files">gulp-bower-files</h1>
+<pre><code>gulpBowerFiles()
+    .pipe(concat(&#39;third-party.js&#39;))
+    .pipe(gulp.dest(&#39;./output&#39;))
+</code></pre></div></li><li id="slide-16" class="slide"><div class="slide-inner"><h1 id="gulp-coffeelint">gulp-coffeelint</h1>
+<pre><code>gulp.src(&#39;./*.coffee&#39;)
+    .pipe(coffeelint())
+    .pipe(coffeelint(&#39;error&#39;))
+    .pipe(coffee())
+    .pipe(gulp.dest(&#39;./output&#39;))
+</code></pre><p>See <a href="http://github.com/adam-lynch/gulp-coffeelint-threshold">gulp-coffeelint-threshold</a> and <a href="http://editorconfig.org">editorconfig.org</a></p>
+</div></li><li id="slide-17" class="slide"><div class="slide-inner"><h1 id="gulp-plato">gulp-plato</h1>
+<pre><code>gulp.src(&#39;./*.js&#39;)
+    .pipe(plato(&#39;report&#39;))
+</code></pre></div></li><li id="slide-18" class="slide"><div class="slide-inner"><h1 id="acceptance">Acceptance</h1>
+</div></li><li id="slide-19" class="slide short-list"><div class="slide-inner"><ul>
+<li>browser-sync</li>
+<li>lazypipe</li>
+<li>cult</li>
+<li>sequencify</li>
+<li>slush</li>
+<li>through</li>
+<li>through2</li>
+</ul>
+</div></li><li id="slide-20" class="slide"><div class="slide-inner"><h1 id="browser-sync">browser-sync</h1>
+<pre><code>var gulp = require(&#39;gulp&#39;);
+var browserSync = require(&#39;browser-sync&#39;);
+var less = require(&#39;gulp-less&#39;);
+
+gulp.task(&#39;browser-sync&#39;, function() {
+    browserSync.init(&quot;./css/*.css&quot;);
+});
+
+gulp.task(&#39;less&#39;, function () {
+    gulp.src(&#39;less/index.less&#39;)
+        .pipe(less())
+        .pipe(gulp.dest(&#39;./css&#39;));
+});
+
+gulp.task(&#39;default&#39;, [&#39;less&#39;, &#39;browser-sync&#39;], function () {
+    gulp.watch(&quot;styles/*.less&quot;, [&#39;less&#39;]);
+});
+</code></pre></div></li><li id="slide-21" class="slide"><div class="slide-inner"><h1 id="future-friendly">Future Friendly</h1>
+</div></li><li id="slide-22" class="slide"><div class="slide-inner"><h1 id="gulp-ked">gulp-ked</h1>
+<pre><code>hereLa &#39;feen.ked&#39; like
+
+remember €x = 20 like
+eh( €x into 20 is not 5 ){
+    saysI &#39;Alright boy, calm down will ya&#39; like
+    stopTheLights() like
+}
+</code></pre><pre><code>gulp.src(&#39;app.ked&#39;)
+    .pipe(ked())
+    .pipe(gulp.dest(&#39;./pana&#39;));
+</code></pre><p><a href="http://github.com/adam-lynch/ked">github.com/adam-lynch/ked</a></p>
+</div></li><li id="slide-23" class="slide"><div class="slide-inner"><h1 id="thanks">Thanks</h1>
+</div></li></ol><script src="scripts/third-party.js"></script><script src="scripts/third-party-static.js"></script><script src="scripts/index.js"></script></body></html>

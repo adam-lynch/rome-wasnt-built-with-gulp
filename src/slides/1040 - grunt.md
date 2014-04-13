@@ -1,1 +1,0 @@
-![Grunt](images/grunt.png)
