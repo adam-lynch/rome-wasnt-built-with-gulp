@@ -5,7 +5,7 @@
   "private": true,
   "main": "gulpfile.js",
   "scripts": {
-    "setup": "npm i -g bower && bower i && npm i -g coffee-script && npm i",
+    "setup": "npm i -g bower && bower i && npm i -g coffee-script && npm i -g gulp && npm i",
     "compile": "coffee -c gulpfile.coffee && gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -45,6 +45,7 @@
     "gulp-uglify": "~0.2.1",
     "gulp-w3cjs": "~0.1.2",
     "lazypipe": "^0.2.1",
-    "through": "~2.3.4"
+    "through": "~2.3.4",
+    "gulp-gh-pages": "^0.2.0"
   }
 }
