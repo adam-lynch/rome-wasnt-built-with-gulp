@@ -1,6 +1,6 @@
 {
   "name": "rome-wasnt-built-with-gulp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A talk on all things Gulp",
   "private": true,
   "main": "gulpfile.js",
