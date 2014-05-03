@@ -7,4 +7,4 @@ A talk on all things [Gulp](https://github.com/gulpjs/gulp). The talk contained 
 ## Building the slides
 
 1. `npm run setup`
-2. `cult`
+2. `npm run compile`
