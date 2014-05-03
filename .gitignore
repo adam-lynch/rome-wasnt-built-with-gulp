@@ -6,4 +6,5 @@ node_modules
 # files handled by bower
 src/scripts/third-party
 
+gulpfile.js
 output
