@@ -1,21 +1,8 @@
 # Include some plugins and stuff
 gulp = require 'gulp'
-markdown = require 'gulp-markdown'
-frontMatter = require 'gulp-front-matter'
-clean = require 'gulp-clean'
-w3cjs = require 'gulp-w3cjs'
+$ = require("gulp-load-plugins")();
 each = require 'through'
-jade = require 'gulp-jade'
-less = require 'gulp-less'
-imagemin = require 'gulp-imagemin'
-autoprefixer = require 'gulp-autoprefixer'
-coffee = require 'gulp-coffee'
-gulpBowerFiles = require 'gulp-bower-files'
-concat = require 'gulp-concat'
-minifyJs = require 'gulp-uglify'
 lazypipe = require 'lazypipe'
-browserify = require 'gulp-browserify'
-rename = require 'gulp-rename'
 
 
 latestSlides = []
@@ -70,17 +57,17 @@ gulp.task 'watch', ['compile'], ->
 
 gulp.task 'clean', ->
     gulp.src(paths.output())
-    .pipe(clean())
+    .pipe($.clean())
 
 
 gulp.task 'validate', ->
     gulp.src(paths.outputHtml())
-    .pipe(w3cjs())
+    .pipe($.w3cjs())
 
 
 gulp.task 'compress-images', ->
     gulp.src(paths.images())
-    .pipe(imagemin())
+    .pipe($.imagemin())
     .pipe(gulp.dest(paths.compressedImagesDir()))
 
 
@@ -98,8 +85,8 @@ gulp.task 'parse-slides', ->
     latestSlides = [] # reset
 
     gulp.src(paths.slides())
-        .pipe(frontMatter())
-        .pipe(markdown())
+        .pipe($.frontMatter())
+        .pipe($.markdown())
         .pipe each (slide) ->
             latestSlides.push slide
 
@@ -109,27 +96,27 @@ gulp.task 'scripts', ['scripts-first-party', 'scripts-third-party']
 
 gulp.task 'scripts-first-party', ->
     gulp.src(paths.rootScript(), {read:false})
-    .pipe(browserify(
+    .pipe($.browserify(
             transform: ['coffeeify']
             extensions: ['.coffee']
         ))
-    .pipe(rename('index.js'))
+    .pipe($.rename('index.js'))
     .pipe(minifyAndStoreScripts())
 
 
 gulp.task 'scripts-third-party', ->
-    gulpBowerFiles()
-    .pipe(concat('third-party.js'))
+    $.bowerFiles()
+    .pipe($.concat('third-party.js'))
     .pipe(minifyAndStoreScripts())
 
     gulp.src(paths.source() + 'third-party/third-party-static/*')
-    .pipe(concat('third-party-static.js'))
+    .pipe($.concat('third-party-static.js'))
     .pipe(minifyAndStoreScripts())
 
 
 gulp.task 'templates', ['parse-slides'], ->
     gulp.src(paths.templates())
-    .pipe(jade(
+    .pipe($.jade(
             locals:
                 slides: latestSlides
         ))
@@ -138,6 +125,6 @@ gulp.task 'templates', ['parse-slides'], ->
 
 gulp.task 'styles', ->
     gulp.src(paths.rootStylesheet())
-    .pipe(less())
-    .pipe(autoprefixer('last 2 versions'))
+    .pipe($.less())
+    .pipe($.autoprefixer('last 2 versions'))
     .pipe(gulp.dest(paths.output()))
