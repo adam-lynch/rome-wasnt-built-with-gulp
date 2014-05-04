@@ -79,8 +79,8 @@ gulp.task(&#39;test&#39;, function(){
 });
 
 gulp.task(&#39;watch&#39;, [&#39;scripts&#39;], function(){
-  gulp.src(&#39;./src/scripts/*.js&#39;, [&#39;scripts&#39;]);
-  gulp.src(&#39;./src/tests/*.js&#39;, [&#39;test&#39;]);
+  gulp.watch(&#39;./src/scripts/*.js&#39;, [&#39;scripts&#39;]);
+  gulp.watch(&#39;./src/tests/*.js&#39;, [&#39;test&#39;]);
 });
 </code></pre>
 </div></li><li id="slide-8" class="slide"><div class="slide-inner"><h1 id="gulp-stream-https-github-com-substack-stream-handbook-ing-build-system">Gulp = <a href="https://github.com/substack/stream-handbook">Stream</a>ing build system</h1>
